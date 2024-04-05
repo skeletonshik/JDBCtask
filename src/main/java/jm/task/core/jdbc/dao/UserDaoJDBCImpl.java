@@ -16,7 +16,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() throws SQLException {
-        String sql = "CREATE TABLE TYPEONE.USERS (" +
+        String sql = "CREATE TABLE USERS (" +
                 "  `ID` BIGINT(200) NOT NULL AUTO_INCREMENT," +
                 "  `NAME` VARCHAR(50) NULL," +
                 "  `LAST_NAME` VARCHAR(50) NULL," +
@@ -40,7 +40,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Statement dropTable = connection.createStatement()){
             connection.setAutoCommit(false);
-            dropTable.executeUpdate("DROP TABLE TYPEONE.USERS");
+            dropTable.executeUpdate("DROP TABLE USERS");
         } catch (SQLException e)    {
             connection.rollback();
         } finally {
@@ -50,7 +50,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
 
-        String sql = "INSERT INTO TYPEONE.USERS (NAME, LAST_NAME, AGE) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO USERS (NAME, LAST_NAME, AGE) VALUES (?, ?, ?);";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             connection.setAutoCommit(false);
@@ -67,7 +67,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) throws SQLException {
-        String sql = "DELETE FROM TYPEONE.USERS WHERE ID =?";
+        String sql = "DELETE FROM USERS WHERE ID =?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             connection.setAutoCommit(false);
@@ -84,7 +84,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() throws SQLException {
         List<User> userList = new ArrayList<>();
 
-        String sql = "SELECT ID, NAME, LAST_NAME, AGE FROM TYPEONE.USERS";
+        String sql = "SELECT ID, NAME, LAST_NAME, AGE FROM USERS";
 
         try (Statement statement = connection.createStatement()){
             connection.setAutoCommit(false);
@@ -108,7 +108,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
 
     public void cleanUsersTable() throws SQLException {
-        String sql = "TRUNCATE TABLE TYPEONE.USERS";
+        String sql = "TRUNCATE TABLE USERS";
         try (Statement statement = connection.createStatement()){
             connection.setAutoCommit(false);
             statement.execute(sql);
