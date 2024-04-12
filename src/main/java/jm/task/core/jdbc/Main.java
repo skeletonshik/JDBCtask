@@ -25,5 +25,6 @@ public class Main {
         service.cleanUsersTable();
         service.dropUsersTable();
 
+        service.closeConnection();
     }
 }

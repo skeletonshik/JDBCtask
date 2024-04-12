@@ -21,15 +21,5 @@ public class Util {
         return connection;
     }
 
-    public static void closeConnection(Connection connection) {
-        if (connection != null) {
-            try {
-                connection.close();
-                System.out.println("Соединение с базой данных закрыто.");
-            } catch (SQLException e) {
-                System.err.println("Ошибка при закрытии соединения с базой данных: " + e.getMessage());
-            }
-        }
-    }
 
 }

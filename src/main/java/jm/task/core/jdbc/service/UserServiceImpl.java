@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private final UserDaoJDBCImpl dao = new UserDaoJDBCImpl();
+    private final UserDao dao = new UserDaoJDBCImpl();
 
     public void createUsersTable() throws SQLException {
         dao.createUsersTable();
@@ -34,5 +34,10 @@ public class UserServiceImpl implements UserService {
 
     public void cleanUsersTable() throws SQLException {
         dao.cleanUsersTable();
+    }
+
+    @Override
+    public void closeConnection() {
+        dao.closeConnection();
     }
 }
