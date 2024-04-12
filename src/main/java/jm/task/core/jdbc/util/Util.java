@@ -8,17 +8,28 @@ public class Util {
     private static final String USERNAME ="root1";
     private static final String PASSWORD = "root";
 
-    public static Connection getConnection()   {
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            if(!connection.isClosed())  {
+            if (!connection.isClosed()) {
                 System.out.println("Соединение получено!");
             }
-        }   catch (SQLException e)  {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+                System.out.println("Соединение с базой данных закрыто.");
+            } catch (SQLException e) {
+                System.err.println("Ошибка при закрытии соединения с базой данных: " + e.getMessage());
+            }
+        }
     }
 
 }
